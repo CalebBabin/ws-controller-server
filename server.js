@@ -28,7 +28,13 @@ const parseMessage = (message, socket) => {
         break;
 
         case 's': // "s" is short for "send"
-            broadcastMessage(data.c, data.d);
+
+            
+
+            broadcastMessage(data.c, {
+                i: 'c', // Indicate message is coming from a controller
+                d: data.d,
+            });
         break;
 
     }
@@ -41,7 +47,7 @@ const broadcastMessage = (channel, data) => {
             ws.send(JSON.stringify(data));
         }
     });
-    
+
 }
 
 
