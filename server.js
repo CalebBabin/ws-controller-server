@@ -19,7 +19,7 @@ const parseMessage = (message, socket) => {
     } catch (e) {
         console.error(e);
         return;
-    }
+    }  
     
     switch (data.c) { // "c" is short for "command"
 
@@ -28,7 +28,7 @@ const parseMessage = (message, socket) => {
         break;
 
         case 's': // "s" is short for "send"
-            broadcastMessage(data.c, {
+            broadcastMessage(data.channel, {
                 i: 'c', // Indicate message is coming from a controller
                 d: data.d,
             });
@@ -39,7 +39,7 @@ const parseMessage = (message, socket) => {
 
 const broadcastMessage = (channel, data) => {
     const message = JSON.stringify(data);
-    
+
     wss.clients.forEach(function each(ws) {
         if (ws.channels && ws.channels[channel] === true) {
             ws.send(message);
