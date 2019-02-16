@@ -31,6 +31,7 @@ const parseMessage = (message, socket) => {
             broadcastMessage(data.channel, {
                 i: 'c', // Indicate message is coming from a controller
                 d: data.d,
+                controller: data.controller
             });
         break;
 
